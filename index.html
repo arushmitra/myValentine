@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Valentine</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: #ffd6e8;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-align: center;
+    min-height: 100vh;
+}
+
+h1 {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ff1493;
+    font-size: 2.5em;
+    text-align: center;
+    animation: floatText 3s ease-in-out infinite;
+    text-shadow: 2px 2px 8px rgba(255, 20, 147, 0.3);
+    width: 90%;
+}
+
+@keyframes floatText {
+    0% { transform: translate(-50%, -50%) translateY(0px); }
+    50% { transform: translate(-50%, -50%) translateY(-15px); }
+    100% { transform: translate(-50%, -50%) translateY(0px); }
+}
+
+button.main {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    position: fixed;
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+
+#yes { background: #ff69b4; color: white; }
+#no { background: white; color: #ff1493; }
+
+.heart {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: white;
+    transform: rotate(45deg);
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+}
+
+.heart::before { top: -6px; left: 0; }
+.heart::after { left: -6px; top: 0; }
+
+.gallery-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    padding-bottom: 50px;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.flower-btn {
+    width: 130px;
+    height: 160px;
+    background: white;
+    border-radius: 20px;
+    border: 2px solid #ffb6c1;
+    cursor: pointer;
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+    padding: 10px;
+}
+
+.flower-icon {
+    max-width: 100px;
+    max-height: 120px;
+}
+
+#gallery-main-photo {
+    width: 80%;
+    max-width: 320px;
+    border-radius: 30px;
+    border: 6px solid white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    margin-top: 30px;
+}
+
+/* Style for the "I LOVE YOU" message */
+.final-declaration {
+    margin-top: 25px;
+    color: #ff1493;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+    animation: pulse 2s infinite;
+    padding: 0 20px;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+#memory-display {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 300px;
+    border-radius: 20px;
+    border: 5px solid white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 5;
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, 20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.detached-text {
+    position: fixed;
+    background: white;
+    color: #ff1493;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 15px 25px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
+    text-align: center;
+    width: 85%;
+    max-width: 350px;
+    z-index: 20;
+}
+
+#back-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background: #ff1493;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: none;
+    font-family: inherit;
+    z-index: 30;
+}
+</style> 
+</head>
+
+<body>
+
+<h1 id="title">Will you be my valentine Anaya? 💕</h1>
+
+<button id="yes" class="main">Yes 💖</button>
+<button id="no" class="main">No</button>
+
+<div class="gallery-container" id="gallery-container">
+    <div class="gallery" id="gallery">
+        <button class="flower-btn" data-id="camellia" data-img="camellia.jpg">
+            <img src="Camellia-removebg-preview.png" class="flower-icon">
+        </button>
+        <button class="flower-btn" data-id="daisy" data-img="daisy.jpeg">
+            <img src="daisy-removebg-preview.png" class="flower-icon">
+        </button>
+        <button class="flower-btn" data-id="delphinium" data-img="Delphinium.JPG">
+            <img src="Delphinium-removebg-preview.png" class="flower-icon">
+        </button>
+        <button class="flower-btn" data-id="rose" data-img="rose.JPG">
+            <img src="rose-removebg-preview.png" class="flower-icon">
+        </button>
+        <button class="flower-btn" data-id="sunflower" data-img="sunflower.jpeg">
+            <img src="sunflower-removebg-preview.png" class="flower-icon">
+        </button>
+        <button class="flower-btn" data-id="tulip" data-img="tulip.jpg">
+            <img src="tulip-removebg-preview.png" class="flower-icon">
+        </button>
+    </div>
+    
+    <img id="gallery-main-photo" src="main-screen.png" alt="Us">
+    
+    <div class="final-declaration" id="final-text">
+        I LOVE YOU MY BEAUTIFUL VALENTINE 💖
+    </div>
+</div>
+
+<img id="memory-display" src="" alt="Memory">
+<button id="back-btn">Back to Flowers 🌸</button>
+
+<script>
+function placeHearts() {
+    for (let i = 0; i < 60; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.top = Math.random() * 100 + "vh";
+        heart.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(heart);
+    }
+}
+placeHearts();
+
+const yesButton = document.getElementById("yes");
+const noButton = document.getElementById("no");
+const galleryContainer = document.getElementById("gallery-container");
+const mainPhoto = document.getElementById("gallery-main-photo");
+const finalText = document.getElementById("final-text");
+const title = document.getElementById("title");
+const backBtn = document.getElementById("back-btn");
+const memoryDisplay = document.getElementById("memory-display");
+
+function positionButtons() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const centerX = vw / 2;
+    const yPos = vh * 0.6;
+    yesButton.style.left = (centerX - yesButton.offsetWidth - 10) + "px";
+    yesButton.style.top = yPos + "px";
+    noButton.style.left = (centerX + 10) + "px";
+    noButton.style.top = yPos + "px";
+}
+positionButtons();
+window.addEventListener("resize", positionButtons);
+
+noButton.addEventListener("mouseover", () => {
+    noButton.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    noButton.style.top = Math.random() * (window.innerHeight - 50) + "px";
+});
+
+yesButton.addEventListener("click", () => {
+    title.style.display = "none";
+    yesButton.style.display = "none";
+    noButton.style.display = "none";
+    galleryContainer.style.display = "flex";
+});
+
+const flowerMessages = {
+    "camellia": "Anaya, my love you make me the happiest man on earth, I love you.",
+    "daisy": "Anaya you are the best thing that could have ever happened to me.",
+    "delphinium": "In the words of Jerry Maguire- You Complete Me.",
+    "rose": "Anaya, I can't wait to spend everyday,for the rest of my life with you, I love you so much sweetheart.",
+    "sunflower": "You brighten my day like a Sunflower, I love you baby",
+    "tulip": "I wish you could see yourself through my eyes, just so you could know how flawless you are, in every way."
+};
+
+document.querySelectorAll(".flower-btn").forEach(button => {
+    button.addEventListener("click", () => {
+        // Hide the main gallery elements
+        mainPhoto.style.display = "none";
+        finalText.style.display = "none";
+        
+        document.querySelectorAll(".flower-btn").forEach(btn => {
+            if (btn !== button) btn.style.display = "none";
+        });
+
+        button.style.position = "fixed";
+        button.style.top = "5%"; 
+        button.style.left = "50%";
+        button.style.transform = "translateX(-50%)";
+
+        const flowerId = button.getAttribute("data-id");
+        let msgBox = document.querySelector(".detached-text");
+        if (!msgBox) {
+            msgBox = document.createElement("div");
+            msgBox.classList.add("detached-text");
+            document.body.appendChild(msgBox);
+        }
+        msgBox.textContent = flowerMessages[flowerId];
+        msgBox.style.display = "block";
+        msgBox.style.top = "26%"; 
+        msgBox.style.left = "50%";
+        msgBox.style.transform = "translateX(-50%)";
+
+        const memoryImg = button.getAttribute("data-img");
+        memoryDisplay.src = memoryImg;
+        memoryDisplay.style.display = "block";
+        memoryDisplay.style.top = "40%"; 
+
+        backBtn.style.display = "block";
+    });
+});
+
+backBtn.addEventListener("click", () => {
+    if (document.querySelector(".detached-text")) document.querySelector(".detached-text").style.display = "none";
+    memoryDisplay.style.display = "none";
+    backBtn.style.display = "none";
+    
+    // Bring back main gallery elements
+    mainPhoto.style.display = "block";
+    finalText.style.display = "block";
+    
+    document.querySelectorAll(".flower-btn").forEach(btn => {
+        btn.style.display = "flex";
+        btn.style.position = "relative";
+        btn.style.top = "auto";
+        btn.style.left = "auto";
+        btn.style.transform = "none";
+    });
+});
+</script>
+
+</body>
+</html>
