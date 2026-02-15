@@ -119,7 +119,6 @@ button.main {
     margin-top: 30px;
 }
 
-/* Style for the "I LOVE YOU" message */
 .final-declaration {
     margin-top: 25px;
     color: #ff1493;
@@ -199,15 +198,15 @@ button.main {
 <div class="gallery-container" id="gallery-container">
     <div class="gallery" id="gallery">
         <button class="flower-btn" data-id="camellia" data-img="camellia.jpg">
-            <img src="Camellia-removebg-preview.png" class="flower-icon">
+            <img src="camellia-removebg-preview.png" class="flower-icon">
         </button>
         <button class="flower-btn" data-id="daisy" data-img="daisy.jpeg">
             <img src="daisy-removebg-preview.png" class="flower-icon">
         </button>
-        <button class="flower-btn" data-id="delphinium" data-img="Delphinium.JPG">
-            <img src="Delphinium-removebg-preview.png" class="flower-icon">
+        <button class="flower-btn" data-id="delphinium" data-img="delphinium.jpg">
+            <img src="delphinium-removebg-preview.png" class="flower-icon">
         </button>
-        <button class="flower-btn" data-id="rose" data-img="rose.JPG">
+        <button class="flower-btn" data-id="rose" data-img="rose.jpg">
             <img src="rose-removebg-preview.png" class="flower-icon">
         </button>
         <button class="flower-btn" data-id="sunflower" data-img="sunflower.jpeg">
@@ -285,7 +284,6 @@ const flowerMessages = {
 
 document.querySelectorAll(".flower-btn").forEach(button => {
     button.addEventListener("click", () => {
-        // Hide the main gallery elements
         mainPhoto.style.display = "none";
         finalText.style.display = "none";
         
@@ -325,7 +323,6 @@ backBtn.addEventListener("click", () => {
     memoryDisplay.style.display = "none";
     backBtn.style.display = "none";
     
-    // Bring back main gallery elements
     mainPhoto.style.display = "block";
     finalText.style.display = "block";
     
